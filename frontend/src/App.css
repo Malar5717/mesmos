@@ -1,0 +1,12 @@
+.app_main {
+    width: 100vw;
+    height: 100vh;
+    background:
+             repeating-linear-gradient(to bottom,
+            transparent 0px 99px,
+            black 99px 100px) ,
+            repeating-linear-gradient(to right,
+            transparent 0px 99px,
+            black 99px 100px),
+            ivory;
+}
