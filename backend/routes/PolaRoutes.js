@@ -54,6 +54,42 @@ pola_router.get('/:id', async (req, res) => {
 })
 
 // 03 -U- update 
+pola_router.put('/:id', decToken, async (req, res) => {
+    try {
+        const id = req.params.id
+        const pola = await Pola.findById(id)
+        if(pola.user!=req.decodedUserId) {
+            return res.status(403).json({msg: "forbidden"})
+        }
+        const { title, description } = req.body
+        const updateObj = {}
+        if(title) {
+            updateObj['title'] = title
+        }if(description) {
+            updateObj['description'] = description
+        }
+        const updatedPola = await Pola.findByIdAndUpdate(id, updateObj, {new:true})
+        return res.status(200).json(updatedPola)
+    }
+    catch(err) {
+        console.log(err)
+    }
+})
 
+// 04 -D- delete 
+pola_router.delete('/:id', decToken, async (req, res) => {
+    try {
+        const id = req.params.id
+        const pola = await Pola.findById(id)
+        if(pola.user!=req.decodedUserId) {
+            return res.status(403).json({msg: "forbidden"})
+        }
+        const deletedPola = await Pola.findByIdAndDelete(id)
+        return res.status(200).json(deletedPola)
+    }
+    catch(err) {
+        console.log(err)
+    }
+})
 
-module.exports = pola_router
+module.exports = pola_router 
