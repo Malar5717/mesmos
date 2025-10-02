@@ -3,40 +3,18 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-import Note from './components/notes/Note'
+import HomeContent from './pages/Home'
+import SignUp from './components/get-in/Signup'
 
-
-function App() {
-
-  const HomeContent = () => {
-
-    const [ polas, setPolas ] = useState([])
-
-    useEffect(() => {
-      const fetchPolas = () => {
-        axios.get("http://localhost:3000/pola/all")
-          .then(res => setPolas(res.data))
-          .catch(err => console.log(err))
-      }
-      fetchPolas()
-    }, [])
-
-      return (
-        <div className="polas">
-          {polas.map((pola, i) => (
-            <Note title={pola.title}  description={pola.description} key={i}/>
-          ))}
-        </div>
-      )
-      
-    }
+function App() { 
 
   return (
     <div className='app_main'>
       <Routes>
     
-        <Route path="/" element={<HomeContent />} /> 
-        
+        <Route path="/" element={<HomeContent />} />
+        <Route path="/signup" element={<SignUp />} />
+
       </Routes>
     </div>
   )
@@ -44,3 +22,4 @@ function App() {
 }
 
 export default App
+                                                                                                      

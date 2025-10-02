@@ -11,9 +11,9 @@ const secretJWTKEY = process.env.SECRET_JWT_KEY;
 const genToken = (id, res) => {
     const token = jwt.sign({ id }, secretJWTKEY, { expiresIn: '2d' });
     res.cookie('jwt_token', token, {
-        // httpOnly: true,
+        httpOnly: true,
         secure: false,
-        sameSite: 'none',
+        sameSite: 'lax',
         // valid time in millisecs 
         maxAge: 2 * 24 * 60 * 60 * 1000
     })
@@ -22,6 +22,7 @@ const genToken = (id, res) => {
 // sign up 
 user_router.post('/signup', async function (req, res) {
     try {
+        console.log(req.body)
         const { username, usermail, password } = req.body;
 
         // User model is a class, assign it to the user object 
