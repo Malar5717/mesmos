@@ -2,11 +2,21 @@
     width: 100vw;
     height: 100vh;
     background:
-             repeating-linear-gradient(to bottom,
-            transparent 0px 99px,
-            black 99px 100px) ,
+            repeating-linear-gradient(to bottom,
+            transparent 0px 9px,
+            rgba(0, 0, 0, 0.06) 9px 10px) ,
             repeating-linear-gradient(to right,
-            transparent 0px 99px,
-            black 99px 100px),
-            ivory;
+            transparent 0px 9px,
+            rgba(0, 0, 0, 0.06) 9px 10px),
+            ivory;    
+    padding: 0 5%;
 }
+
+.polas{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* so both notes and memoroids are polas? where do we say that export as pola ah */

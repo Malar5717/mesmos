@@ -8,7 +8,7 @@ const user_router = require('./routes/UserRoutes');
 const pola_router = require('./routes/PolaRoutes');
 const cookieparser = require('cookie-parser');
 
-// express is the backend framework
+// express is the web framework
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -22,10 +22,10 @@ mongoose.connect(mongoDB).then(()=> {
     });
 });
 
+// parent route for all 
 app.use('/user',user_router);
 app.use('/pola',pola_router);
 app.get('/',(req, res)=>{
     res.json({msg:"hello"})
 })
 
-// 

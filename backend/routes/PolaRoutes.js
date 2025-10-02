@@ -28,7 +28,7 @@ pola_router.post('/create', decToken, async (req, res) => {
 // 02 -R- read 
 pola_router.get('/all', async (req, res) => {
     try {
-        const polas = await Pola.find({})
+        const polas = await Pola.find({}).sort({createdAt: -1}) // newest first
         if(polas.length===0) {
             return res.status(404).json({msg: "empty, nothing to display"})
         }
@@ -46,7 +46,7 @@ pola_router.get('/:id', async (req, res) => {
         if(!pola) {
             return res.status(404).json({msg: "empty"})
         }
-        return res.status(200).json(pola)
+        return res.status(200).json(pola.populate("user", "username"))
     }
     catch(err) {
         console.log(err);
@@ -93,3 +93,5 @@ pola_router.delete('/:id', decToken, async (req, res) => {
 })
 
 module.exports = pola_router 
+
+
