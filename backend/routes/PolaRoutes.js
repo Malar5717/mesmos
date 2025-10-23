@@ -39,6 +39,21 @@ pola_router.get('/all', async (req, res) => {
     }
 })
 
+// id can reach unverified persons 
+pola_router.get('/my', decToken, async (req, res) => {
+    try {
+        const id = req.decodedUserId
+        const polas = await Pola.find({user: id}).sort({createdAt: -1})
+        if(polas.length===0) {
+            return res.status(404).json({msg: "empty, nothing to display"})
+        }
+        return res.status(200).json(polas)
+    }
+    catch(err) {
+        console.log(err);
+    }
+})
+
 pola_router.get('/:id', async (req, res) => {
     try {
         const id = req.params.id

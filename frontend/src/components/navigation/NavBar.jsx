@@ -5,11 +5,10 @@ function NavBar({ onAddClick, isCreateOpen }) {
   return (
     <div className='navbar_main'>
       <div className='logo'>
-        <p>abcdef.</p>
+        <p>LOGO</p>
       </div>
       <div className='account'>
         <p onClick={() => onAddClick(!isCreateOpen)}>add</p>
-        <p>recall</p>
         <p>acc</p>
       </div>
     </div>
