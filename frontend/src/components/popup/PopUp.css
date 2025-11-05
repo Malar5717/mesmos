@@ -1,0 +1,35 @@
+.OuterBox {
+    height: 140px;
+    width: 340px;
+    background-color: var(--buu);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    padding: 1.4px;
+    border-radius: 3px;
+}
+.OuterBox > p {
+    background-color: red;
+    margin: 1.5px; 
+    margin-left: auto;
+    text-align: center;
+    font-weight: bolder;
+    border-radius: 6px;
+    width: 25px;
+}
+
+.InnerBox {
+    margin: 2.6px;
+    height: 100%;
+    background-color: var(--gey);
+    padding: 0 20px;
+    border-radius: 2.5px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.InnerBox button {
+    background-color: var(--big-gey);
+}
+

@@ -7,7 +7,7 @@ import HomeContent from './pages/Home'
 import SignUp from './pages/signup/Signup'
 import Login from './pages/login/Login'
 import MyMemories from './pages/my_memories/MyMemories'
-import PreLoader from './pages/PreLoader'
+import PreLoader from './pages/preloader/PreLoader'
 
 function App() { 
 
