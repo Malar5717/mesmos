@@ -1,6 +1,6 @@
-.PopUp .OuterBox {
-    height: 140px;
-    /* width: 340px; */
+.MainPopUp .OuterBox {
+    height: 274px;
+    width: 619px;
     background-color: var(--buu);
     position: absolute;
     display: flex;
@@ -9,7 +9,7 @@
     border-radius: 3px;
 }
 
-.PopUp .OuterBox > p {
+.MainPopUp .OuterBox > p {
     background-color: red;
     margin: 1.5px; 
     margin-left: auto;
@@ -19,28 +19,42 @@
     width: 25px;
 }
 
-.PopUp .InnerBox {
+.MainPopUp .InnerBox .Text > h2 {
+    font-size: 48px;
+    font-weight: 800;
+}
+
+.MainPopUp .InnerBox .Text > p {
+    margin-top: -10px;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.MainPopUp .InnerBox {
     margin: 2.6px;
     height: 100%;
     background-color: var(--gey);
     padding: 0 20px;
     border-radius: 2.5px;
     align-items: center;
+    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 }
 
-.PopUp .InnerBox p {
-    font-weight: 700;
+.MainPopUp .InnerBox .controls {
+    display: flex;
+    gap: 20px;
 }
 
-.PopUp .InnerBox button {
-    background-color: var(--gey);
+.MainPopUp .InnerBox button {
+    background-color: var(--big-gey);
     box-shadow: 2px 4px 2px 0 var(--black);
-    border: 1px solid black;
     padding: 2px 10px;
     border-radius: 4px;
+    font-size: 23px;
+    color: rgba(245, 245, 245, 0.7);
+    border-radius: 8px;
 }
-
 

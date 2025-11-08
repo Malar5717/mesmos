@@ -1,0 +1,51 @@
+.TurnOff .OuterBox {
+    width: 250px;
+    height: 110px;
+    padding: 0 2px 3px 2px;
+    background-color: var(--buu);
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+}
+
+.TurnOff .OuterBox p {
+    color: whitesmoke;
+    font-family: 'Khula', sans-serif;
+    font-weight: 700;
+    font-size: 9px;
+    padding: 4px;
+}
+
+.TurnOff .InnerBox {
+    flex: 1;
+    height: 82px;
+    background-color: #988AF4;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.TurnOff .InnerBox .mode .opt {
+    width: 35px;
+    height: 33px;
+    border-radius: 15px;
+    display: grid;
+    place-items: center;
+    border: 1px solid black;
+}
+
+.TurnOff .InnerBox .mode:nth-of-type(1) .opt {
+    background-color: #E1D71A;
+}
+.TurnOff .InnerBox .mode:nth-child(2) .opt{
+    background-color: #17A512;
+}
+.TurnOff .InnerBox .mode:nth-child(3) .opt{
+    background-color: #CA251A;
+}
+
+.TurnOff .InnerBox .mode .name {
+    font-size: 6px;
+    text-align: center;
+}

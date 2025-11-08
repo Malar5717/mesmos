@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300..700&family=Mukta+Malar:wght@200;300;400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Jura:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Khula:wght@300;400;600;700;800&display=swap');
 
 #root {
     --creame: #FEFCF6; 
     --buu: #4B3DA8;
     --big-gey: #808080;
-    --gey: #C0C0C0;
+    --gey: #D9D9D9;
     --black: rgba(30, 30, 30, 0.8);
 }
 
@@ -14,6 +13,7 @@
     height: 100vh;
     background: var(--creame);    
     padding: 0 5%;
+    font-family: "Khula", sans-serif;
 }
 
 .polas{
@@ -22,5 +22,3 @@
     justify-content: space-between;
     align-items: center;
 }
-
-/* so both notes and memoroids are polas? where do we say that export as pola ah */

@@ -1,0 +1,37 @@
+.Canvas .OuterBox {
+    height: 280px;
+    width: 270px;
+    border-radius: 7px;
+    padding: 5px 4px 5px 4px;
+    background-color: var(--buu);
+    display: flex;
+    flex-direction: column;
+
+    left: 45%;
+}
+
+.Canvas button {
+    width: 30px;
+    height: 30px;
+    margin-left: auto;
+    border-radius: 5px;
+    background-color: red;
+    font-weight: bolder;
+    padding: 5px;
+} 
+
+.Canvas .InnerBox {
+    flex: 1;
+    background-color: var(--gey);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+}
+
+.Canvas .InnerBox .Blank {
+    width: 80%;
+    height: 85%;
+    background-color: #EFECE4;
+    border-radius: 5px;
+}
+
