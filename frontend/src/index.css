@@ -34,12 +34,12 @@ body {
     padding-left: 42px;
 }
 
-.heart {
-    text-align: right;
-    z-index: 1000;
-}
 .sweet-heart {
     background-color: #FCE4EC;
+}
+/* sweatheart  */
+.heart { 
+    text-align: right; 
 }
 
 .dotted {
@@ -51,6 +51,7 @@ body {
 /* memoroid styles */
 .single-taped {
     background-color: #FFF8E7;
+    border: 1px solid #ae9967;
     position: relative;
 }
 
@@ -99,6 +100,7 @@ body {
 
 .paper-pinned {
     background-color: #F6F6F6;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
     position: relative;
 }
 
@@ -125,7 +127,6 @@ body {
 }
 
 .sticky-note {
-    border: 1px solid pink;
     position: relative;
     background: linear-gradient(to bottom, #FBCACA 0%, #FBCACA 10%, #FDDDDE 10%, #FDDDDE 100%);
 }
@@ -164,6 +165,7 @@ body {
     background-size: 10px 12px;
     background-position: 2px -5px;
     background-repeat: repeat-x;
+    box-shadow: 2px 2px 25px rgba(0, 0, 0, 0.1);
 }
 
 .holes-punched::before {

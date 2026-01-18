@@ -1,7 +1,6 @@
 import React from "react";
-import "./Memoroid.css";
 
-function Memoroid({ title, description, createdAt, image_url, style }) {
+function Memoroid({ title, description, createdAt, image_url, style, isEditing = false, onTitleChange = () => {}, onDescChange = () => {} }) {
   const date = new Date(createdAt);
   const istDate = new Intl.DateTimeFormat("en-IN", {
     timeZone: "Asia/Kolkata",
@@ -14,13 +13,34 @@ function Memoroid({ title, description, createdAt, image_url, style }) {
   }).format(date);
 
   return (
-    <div className={`pola ${style}`}>
-      <img src={image_url} />
-      <p className="dt">{istDate}</p>
-      <h1>{title}</h1>
-      <p>{description}</p>
-    </div>
-  );
+  <div className={`pola ${style}`}>
+    
+    <img src={image_url} alt="" />
+    <p className="dt">{istDate}</p>
+
+    {isEditing ? (
+      <>
+        <input
+          type="text"
+          value={title}
+          onChange={e => onTitleChange(e.target.value)}
+        />
+
+        <textarea
+          value={description}
+          onChange={e => onDescChange(e.target.value)}
+        />
+      </>
+    ) : (
+      <>
+        <h1>{title}</h1>
+        <p>{description}</p>
+      </>
+    )}
+
+  </div>
+);
+
 }
 
 export default Memoroid;

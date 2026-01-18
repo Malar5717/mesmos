@@ -34,7 +34,7 @@ const MyMemories = () => {
     axios
       .put(
         `http://localhost:3000/pola/${id}`,
-        editData, // send as plain object, not {editData}
+        editData,
         { withCredentials: true }
       )
       .then(() => {
@@ -54,9 +54,7 @@ const MyMemories = () => {
     axios
       .delete(`http://localhost:3000/pola/${id}`, { withCredentials: true })
       .then(() => {
-        setPolas((prev) => {
-          prev.filter((pola) => pola._id !== id)
-        });
+        setPolas((prev) => prev.filter((pola) => pola._id !== id));
       })
       .catch((err) => setError(err.response?.data || err));
   };
@@ -74,53 +72,48 @@ const MyMemories = () => {
         }}
       >
         <Masonry>
-          {polas.map((pola, i) => {
+          {polas.map((pola) => {
+            const isEditing = isEditOpen && editPola && editPola._id === pola._id;
             return (
-              <div key={i} className="masonry-item">
-                {pola.image_url ? (
-                  <Memoroid
-                    title={pola.title}
-                    description={pola.description}
-                    image_url={pola.image_url}
-                    createdAt={pola.createdAt}
-                    style={pola.style}
-                  />
-                ) : (
-                  <Note
-                    title={pola.title}
-                    description={pola.description}
-                    createdAt={pola.createdAt}
-                    style={pola.style}
-                  />
-                )}
-
-                <FontAwesomeIcon
-                  icon={faPenToSquare}
-                  onClick={() => {
-                    setIsEditOpen(true);
-                    setEditPola(pola);
-                    setEdittedTitle(pola.title);
-                    setEdittedDescription(pola.description);
-                  }}
-                />
-                {isEditOpen && editPola && editPola._id === pola._id && (
-                  <div className="editContent">
-                    <input
-                      type="text"
-                      value={edittedTitle}
-                      onChange={e => setEdittedTitle(e.target.value)}
+              <div key={pola._id} className="masonry-item">
+                <>
+                  {pola.image_url ? (
+                    <Memoroid
+                    // title={ isEditing ? (e) => setEdittedTitle(e.target.value) : pola.title }
+                      title={isEditing ? edittedTitle : pola.title}
+                      description={isEditing ? edittedDescription : pola.description}
+                      image_url={pola.image_url}
+                      createdAt={pola.createdAt}
+                      style={pola.style}
+                      isEditing={isEditing}
+                      onTitleChange={setEdittedTitle}
+                      onDescChange={setEdittedDescription}
                     />
-                    <input
-                      type="text"
-                      value={edittedDescription}
-                      onChange={e => setEdittedDescription(e.target.value)}
+                  ) : (
+                    <Note
+                      title={isEditing ? edittedTitle : pola.title}
+                      description={isEditing ? edittedDescription : pola.description}
+                      createdAt={pola.createdAt}
+                      style={pola.style}
+                      isEditing={isEditing}
+                      onTitleChange={setEdittedTitle}
+                      onDescChange={setEdittedDescription}
                     />
-                    <button onClick={() => handleEdit(pola._id, { title: edittedTitle, description: edittedDescription })}>save</button>
-                    <button onClick={() => setIsEditOpen(false)}>cancel</button>
-                  </div>
-                )}
-
-                <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(pola._id)} />
+                  )}
+                  {isEditing && <button className="controls" onClick={() => handleEdit(pola._id, { title: edittedTitle, description: edittedDescription })}>save</button>}
+                </>
+                <div className="controls">
+                  <FontAwesomeIcon
+                    icon={faPenToSquare}
+                    onClick={() => {
+                      setIsEditOpen(true);
+                      setEditPola(pola);
+                      setEdittedTitle(pola.title);
+                      setEdittedDescription(pola.description);
+                    }}
+                  />
+                  <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(pola._id)} />
+                </div>
               </div>
             );
           })}

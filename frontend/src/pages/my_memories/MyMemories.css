@@ -5,3 +5,18 @@
     align-items: center;
     margin: 0;
 }
+
+.controls {
+    margin: 10px;
+}
+
+button {
+    background: none;
+    border: 1px solid black;
+    padding: 3px 8px;
+}
+
+.editContent {
+    display: flex;
+    flex-direction: column;
+}
