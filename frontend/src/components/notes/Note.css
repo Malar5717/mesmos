@@ -1,10 +1,17 @@
-.note_main{
+.pola{
     border: 1px solid #000;
+
     flex-basis: 18%;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    align-items: flex-start;
+
+    margin-top: 15px;
+    margin-bottom: 5px;
+    padding: 20px;
+    min-height: 250px;
 }
 
-/* front end -> src -> components -> memoroids, notes */
-/* so inside app there are components now -> that is memoroid.jsx and notes.jsx */
-/* so na ulla poi paatha irukum? content */
+/* sweatheart  */
+.heart { 
+    text-align: right; 
+} 
+

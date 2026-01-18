@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./SignUp.css";
+import { useNavigate } from "react-router";
+
 
 export default function SignUp() {
   const [username, setUsername] = useState("");
   const [usermail, setUsermail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const nav = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault(); // form refreshes upon submit
+    setError("");
     if (!username || !usermail || !password) {
+      setError("All fields are required!");
       return;
     }
 
@@ -19,25 +25,24 @@ export default function SignUp() {
         { username, usermail, password },
         { withCredentials: true }
       )
-      .then((res) => {
-        console.log(res);
+      .then(() => {
+        nav("/home");
       })
       .catch((err) => {
-        console.log(err);
+        const msg = err.response?.data?.msg || "Signup failed. Please try again.";
+        setError(msg);
       });
   };
 
   return (
     <div className="signup_container">
       <div className="signup_main">
-
         <div className="form_header">
-          <h1>Sign Up</h1> 
+          <h1>Sign Up</h1>
           <button>×</button>
         </div>
         
         <form className="signup_form" onSubmit={handleSubmit}>
-
           <div className="form_body">
             <div className="form_item">
               <label htmlFor="username">enter username:</label>
@@ -48,7 +53,6 @@ export default function SignUp() {
                 onChange={(e) => setUsername(e.target.value)}
               ></input>
             </div>
-  
             <div className="form_item">
               <label htmlFor="usermail">enter email:</label>
               <input
@@ -58,7 +62,6 @@ export default function SignUp() {
                 onChange={(e) => setUsermail(e.target.value)}
               ></input>
             </div>
-  
             <div className="form_item">
               <label htmlFor="password">create password:</label>
               <input
@@ -69,14 +72,18 @@ export default function SignUp() {
               ></input>
             </div>
           </div>
-          
           <div className="actions">
             <button type="submit">ok</button>
             <button>cancel</button>
           </div>
-
         </form>
+
       </div>
+      {error && (
+          <div className="error-message" style={{ color: 'red', marginTop: '0px' }}>
+            {error}
+          </div>
+        )}
     </div>
   );
 }

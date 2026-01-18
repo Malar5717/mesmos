@@ -9,7 +9,7 @@
     border-radius: 3px;
 }
 
-.MainPopUp .OuterBox > p {
+.MainPopUp .OuterBox > .close {
     background-color: red;
     margin: 1.5px; 
     margin-left: auto;
@@ -56,5 +56,35 @@
     font-size: 23px;
     color: rgba(245, 245, 245, 0.7);
     border-radius: 8px;
+    transition: transform 0.3s ease;
 }
 
+.MainPopUp .InnerBox  button:hover {
+    scale: 0.95;
+}
+.MainPopUp .InnerBox  button:active {
+    scale: 0.9;
+}
+
+.MainPopUp .OuterBox { 
+    transform-origin: center;  
+    animation: pop 0.2s linear 0.65s both, float2 2s linear 0.85s infinite alternate;
+}
+
+@keyframes pop {
+    from { transform: scale(0); }
+    to   { transform: scale(1); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    33% { transform: translateY(-5px) }
+    67% { transform: translateY(5px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes float2{
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px) }
+    100% { transform: translateY(0); }
+}

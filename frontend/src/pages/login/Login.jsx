@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router";
 import "./Login.css";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const nav = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault(); // form refreshes upon submit
@@ -20,7 +22,7 @@ export default function Login() {
         { withCredentials: true }
       )
       .then((res) => {
-        console.log(res);
+        nav("/home");
       })
       .catch((err) => {
         console.log(err);

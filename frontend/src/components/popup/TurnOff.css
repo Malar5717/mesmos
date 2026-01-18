@@ -1,3 +1,7 @@
+.TurnOff {
+    position: absolute;
+}
+
 .TurnOff .OuterBox {
     width: 250px;
     height: 110px;
@@ -48,4 +52,14 @@
 .TurnOff .InnerBox .mode .name {
     font-size: 6px;
     text-align: center;
+}
+
+.TurnOff { 
+    transform-origin: center;  
+    animation: pop 0.2s linear 0.1s both;
+}
+
+@keyframes pop {
+    from { transform: scale(0); }
+    to   { transform: scale(1); }
 }

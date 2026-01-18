@@ -1,6 +1,192 @@
-*{
+html,
+body {
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+}
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}                                                                 
+}
 
+/* note styles  */
+.plain-parch {
+    /* background-color: #F1E9D2; */
+    background-color: #E0E6D8;
+    background-image: radial-gradient(circle, #f0f0f0 4px, transparent 6px);
+    background-size: 15px 10px;
+    background-repeat: repeat-x;
+}
+
+.cubed {
+    background-color: #F4F3EE;
+    background-image: repeating-linear-gradient(to right, transparent 0px, transparent 10px, rgba(57, 57, 57, 0.1) 11px, rgba(57, 57, 57, 0.1) 12px), repeating-linear-gradient(to bottom, transparent 0px, transparent 10px, rgba(57, 57, 57, 0.1) 11px, rgba(57, 57, 57, 0.1) 12px);
+}
+
+.legal-pad {
+    background-color: #FAFAD2;
+    background-image: linear-gradient(90deg, transparent 20%, rgba(177, 16, 22, 0.6) 20%, rgba(177, 16, 22, 0.6) 21%, transparent 22%), linear-gradient(90deg, transparent 23%, rgba(177, 16, 22, 0.6) 23%, rgba(177, 16, 22, 0.6) 24%, transparent 22%), repeating-linear-gradient(transparent 0px, transparent 14%, rgba(212, 175, 55, 0.4) 14%, rgba(212, 175, 55, 0.4) 15%);
+}
+
+.legal-pad h1,
+.legal-pad p {
+    padding-left: 42px;
+}
+
+.heart {
+    text-align: right;
+    z-index: 1000;
+}
+.sweet-heart {
+    background-color: #FCE4EC;
+}
+
+.dotted {
+    background-color: #FFFFFF;
+    background-image: radial-gradient(circle, #b5daf0 1px, transparent 1px);
+    background-size: 10px 10px;
+}
+
+/* memoroid styles */
+.single-taped {
+    background-color: #FFF8E7;
+    position: relative;
+}
+
+.single-taped::before {
+    content: '';
+    position: absolute;
+    top: -3%;
+    left: 50%;
+    transform: translateX(-50%) rotate(3deg);
+    width: 25%;
+    height: 8%;
+    background-color: #E85D75;
+    border: 1px solid #333;
+}
+
+.double-taped {
+    background-color: #DEF0EE;
+    position: relative;
+}
+
+.double-taped::before {
+    content: '';
+    position: absolute;
+    top: -4%;
+    left: 30%;
+    transform: translateX(-50%) rotate(-12deg);
+    width: 28%;
+    height: 6%;
+    background-color: #F1A073;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.873) 1px, transparent 1px), radial-gradient(circle, rgba(255, 255, 255, 0.873) 2px, transparent 3px);
+    background-size: 10px 10px;
+    border: 1px solid #333;
+}
+
+.double-taped::after {
+    content: '';
+    position: absolute;
+    bottom: -2%;
+    right: 10%;
+    transform: translateX(-50%) rotate(10deg);
+    width: 20%;
+    height: 8%;
+    background-color: #F5BF82;
+    border: 1px solid #333;
+}
+
+.paper-pinned {
+    background-color: #F6F6F6;
+    position: relative;
+}
+
+.paper-pinned::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 10%;
+    width: 6%;
+    height: 12%;
+    border-radius: 52px;
+    border: 1px solid #333;
+}
+
+.paper-pinned::after {
+    content: '';
+    position: absolute;
+    top: 0.5%;
+    left: 10%;
+    width: 3%;
+    height: 8%;
+    border-radius: 55px;
+    border: 1px solid #333;
+}
+
+.sticky-note {
+    border: 1px solid pink;
+    position: relative;
+    background: linear-gradient(to bottom, #FBCACA 0%, #FBCACA 10%, #FDDDDE 10%, #FDDDDE 100%);
+}
+
+.sticky-note img {
+    padding-top: 24px;
+}
+
+.sticky-note::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 15%;
+    height: 15%;
+    border-radius: 20% 0 0 0;
+    background-color: rgb(251, 202, 202, 0.5);
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.sticky-note::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 15%;
+    height: 15%;
+    background-color: #FEFCF6;
+    clip-path: polygon(100% 100%, 0 100%, 100% 0);
+}
+
+.holes-punched {
+    background-color: #FBF8F3;
+    background-image: radial-gradient(circle, transparent 0, transparent 2px, #333 2px, #333 3px, transparent 3px);
+    background-color: rgb(221, 211, 239, 0.6);
+    background-size: 10px 12px;
+    background-position: 2px -5px;
+    background-repeat: repeat-x;
+}
+
+.holes-punched::before {
+    content: '';
+    position: absolute;
+
+}
+
+/*  */
+.masonry-item {
+    width: 100%;
+}
+
+.note-card,
+.memoroid {
+    width: 100px;
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+.pola,
+.memoroid_main {
+    width: 100%;
+    max-width: 92%;
+    margin: 0 auto 24px auto;
+}

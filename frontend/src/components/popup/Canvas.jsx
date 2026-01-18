@@ -2,11 +2,11 @@ import React from 'react'
 
 import './Canvas.css'
 
-function Canvas() {
+function Canvas({pos, popDelay, onClose}) {
   return (
-    <div className='Canvas'>
+    <div className='Canvas' style={{ top: pos.top, left: pos.left, animationDelay: popDelay+"ms" }}> 
       <div className='OuterBox'>
-        <button>x</button>
+        <button className='close' onClick={onClose}>x</button>
         <div className='InnerBox'>
             <div className='Blank'></div>
         </div>

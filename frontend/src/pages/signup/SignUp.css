@@ -79,14 +79,18 @@
     padding: 3px 8px;
     background-color: var(--big-gey);
     color: whitesmoke;
-    font-family: "Instrument Serif", serif;
-    font-size: 14px;
+    font-size: 20px;
     outline: 0;
     border: 0;
     box-shadow: 2px 4px 2px 0 var(--black);
 }
 
-
+.actions button:hover {
+    scale: 0.95;
+}
+.actions button:active {
+    scale: 0.9;
+}
 
 
 

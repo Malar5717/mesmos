@@ -2,26 +2,55 @@ const Pola = require('../models/Pola');
 const pola_router = require('express').Router();
 const decToken = require('../middleware/decToken');
 const User = require('../models/User');
+const multer = require('multer');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const cloudinary = require('../services/cloudinary.js')
 
-// const cloudinary = require('../services/cloudinary');
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: 'polas',
+        allowedFormats: ['jpg', 'jpeg', 'png'],
+        public_id: (req, file) => {
+            const uniqueSuffix = Date.now() + Math.round(Math.random()*1e9);
+            return "pola"+uniqueSuffix;
+        }
+    }
+})
+
+// upload middleware
+const upload = multer({ storage });
 
 // 01 -C- create 
-pola_router.post('/create', decToken, async (req, res) => {
+pola_router.post('/create', decToken, upload.single('image'), async (req, res) => {
     try {
-        const { title, description }  = req.body;
+        console.log('--- /create route hit ---');
+        console.log('Request body:', req.body);
+        console.log('Request file:', req.file);
+        console.log('Decoded user ID:', req.decodedUserId);
+
+        const { title, description, style }  = req.body;
         // check for valid user
-        const user = await User.findById(req.decodedUserId)                    
-        if(!user) return res.status(500).json({msg: "user not found"})
+        const user = await User.findById(req.decodedUserId)
+        if(!user) {
+            console.log('User not found for ID:', req.decodedUserId);
+            return res.status(500).json({msg: "user not found"})
+        }
         if(!title || !description) {
+            console.log('Missing required fields:', { title, description });
             return res.status(500).json({msg: "provide required fields"})
         }
-        const pola = new Pola({title, description, user:user._id})
-        // await all DB calls 
+
+        const image_url = req.file ? req.file.path : null;
+        console.log('Image URL to save:', image_url);
+
+        const pola = new Pola({ title, description, user:user._id, image_url, style })
         await pola.save()
+        console.log('Pola created:', pola);
         return res.status(201).json(pola)
     }
     catch(err) {
-        console.log(err);
+        console.log('Error in /create route:', err);
     }
 })
 

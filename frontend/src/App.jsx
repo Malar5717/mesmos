@@ -1,10 +1,8 @@
 import './App.css'
-import axios from 'axios'
-import { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-import HomeContent from './pages/Home'
-import SignUp from './pages/signup/Signup'
+import HomeContent from './pages/Home/Home'
+import SignUp from './pages/signup/SignUp'
 import Login from './pages/login/Login'
 import MyMemories from './pages/my_memories/MyMemories'
 import PreLoader from './pages/preloader/PreLoader'

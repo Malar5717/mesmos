@@ -1,3 +1,7 @@
+.Canvas {
+    position: absolute;
+}
+
 .Canvas .OuterBox {
     height: 280px;
     width: 270px;
@@ -6,8 +10,6 @@
     background-color: var(--buu);
     display: flex;
     flex-direction: column;
-
-    left: 45%;
 }
 
 .Canvas button {
@@ -35,3 +37,12 @@
     border-radius: 5px;
 }
 
+.Canvas { 
+    transform-origin: center;  
+    animation: pop 0.2s linear 0.1s both;
+}
+
+@keyframes pop {
+    from { transform: scale(0); }
+    to   { transform: scale(1); }
+}

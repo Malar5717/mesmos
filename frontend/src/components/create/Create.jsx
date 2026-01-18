@@ -1,52 +1,228 @@
-import axios from 'axios'
-import React, { useState } from 'react'
+import axios from "axios";
+import React, { useState } from "react";
+import "./Create.css";
 
-function Create() {
+const nstyles = ["plain-parch", "cubed", "legal-pad", "sticky-note", "dotted"];
+const mstyles = [
+  "single-taped",
+  "double-taped",
+  "paper-pinned",
+  "sweet-heart",
+  "holes-punched"
+];
 
-  const [ title, setTitle ] = useState("")
-  const [ description, setDescription ] = useState("")
-  const [ image, setImage ] = useState(null)
+function Create({ setIsCreateOpen }) {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState(null);
+  const [style, setStyle] = useState(1);
+  const [error, setError] = useState("");
+
+  const [polaType, setPolaType] = useState("default");
 
   const handleSubmit = (e) => {
-    e.preventDefault() // form refreshes upon submit
-    if(!title || !description) {
-      return
+    console.log("--- Create form submitted ---");
+    e.preventDefault(); // form refreshes upon submit
+    setError("");
+    if (!title || !description) {
+      setError("Title and description are required.");
+      return;
     }
-    // feature of browser 
-    const formData = new FormData()
-    formData.append('title', title)
-    formData.append('description', description)
-    formData.append('image', image)
+    // feature of browser
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("image", image);
+    formData.append("style", style);
 
-    axios.post("http://localhost:3000/pola/create", { title, description }, {withCredentials: true})
-      .then((res)=>{console.log(res)})
-      .catch((err)=>{console.log(err)})
-  }
+    axios
+      .post("http://localhost:3000/pola/create", formData, {
+        withCredentials: true,
+      })
+      .then(() => {
+        setIsCreateOpen(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
-    <form className='create_main' onSubmit={handleSubmit}>
+    <div className="createComp" tabIndex={0} onFocus={() => setError("")}>
+      {error && (
+        <div
+          className="error-message"
+          style={{ color: "red", marginTop: "10px", marginLeft: "10px" }}
+        >
+          {error}
+        </div>
+      )}
+      <form className="create_main" onSubmit={handleSubmit}>
+        <div className="create-title">
+          <div className="form-item">
+            <input
+              type="text"
+              id="title"
+              placeholder="Enter Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              onFocus={() => setError("")}
+            ></input>
+          </div>
+        </div>
 
-      <div className='form-item'>
-        <label htmlFor='image'>Image:</label>
-          <input type='file' id='image' value={ image } onChange={ (e) => setImage(e.target.files[0]) }></input>
-      </div>
+        <div className="create-other">
+          <div className="form-body">
+            <div className="pola-type">
+              <div
+                type="radio"
+                className={`type memoroidPola ${
+                  polaType === "memo" ? "active" : ""
+                }`}
+                onClick={() => setPolaType("memo")}
+              >
+                <div className="sqr">
+                  <div className="sqr"></div>
+                </div>
+              </div>
+              <div
+                type="radio"
+                className={`type notePola ${
+                  polaType === "note" ? "active" : ""
+                }`}
+                onClick={() => setPolaType("note")}
+              >
+                <svg
+                  width="66"
+                  height="83"
+                  viewBox="0 0 66 83"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M49.9565 82.5H0.5V0.5H65.5V65.1271M49.9565 82.5L65.5 65.1271M49.9565 82.5V65.1271H65.5"
+                    stroke="#777"
+                  />
+                </svg>
+              </div>
+              <div className="space"></div>
+            </div>
 
-      <div className='form-item'>
-        <label htmlFor='title'>Title:</label>
-          <input type='text' id='title' value={ title } onChange={ (e) => setTitle(e.target.value) }></input>
-      </div>
+            <div className="pola-data">
+              {polaType === "memo" && (
+                <div className="form-item">
+                  <label htmlFor="image">
+                    {image != null ? image.name : "Image"}
+                  </label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    id="image"
+                    onChange={(e) => setImage(e.target.files[0])}
+                  ></input>
+                </div>
+              )}
 
-      <div className='form-item'>
-        <label htmlFor='description'>Description:</label>
-          <input type='text' id='description' value={ description } onChange={ (e) => setDescription(e.target.value) }></input>
-      </div>
+              {polaType != "default" && (
+                <div className="form-item">
+                  <label
+                    className={
+                      description.length === 0
+                        ? "placeholder_show"
+                        : "placeholder_hide"
+                    }
+                    htmlFor="description"
+                  >
+                    Description
+                  </label>
+                  <textarea
+                    type="text"
+                    id="description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  ></textarea>
+                </div>
+              )}
 
-      <button>submit</button>
+              {polaType === "default" && (
+                <div className="form-item">
+                  <label className={"placeholder_hide"} htmlFor="description">
+                    Description
+                  </label>
+                  <textarea
+                    type="text"
+                    id="description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  ></textarea>
+                </div>
+              )}
+            </div>
+          </div>
 
-    </form>
-  )
+          <div className="styling">
+            <div
+              className={
+                polaType === "memo"
+                  ? "styles memo-styles"
+                  : "styles note-styles"
+              }
+            >
+              {polaType === "memo" && (
+                <div className="memo-styles-list">
+                  {mstyles.map((mstyle) => (
+                    <button
+                      key={mstyle}
+                      type="button"
+                      onClick={() => setStyle(mstyle)}
+                      style={{
+                        border:
+                          style === mstyle
+                            ? "2px solid #4B3DA8"
+                            : "1px solid #ccc",
+                        width: "50%",
+                      }}
+                    >
+                      <div
+                        className={`memo-style ${mstyle}`}
+                      ></div>
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {polaType === "note" && (
+                <div className="note-styles-list">
+                  {nstyles.map((nstyle) => (
+                    <button
+                      key={nstyle}
+                      type="button"
+                      onClick={() => setStyle(nstyle)}
+                      style={{
+                        border:
+                          style === nstyle
+                            ? "2px solid #4B3DA8"
+                            : "1px solid #ccc",
+                        background: "none",
+                      }}
+                    >       
+                      <div
+                        className={`note-style ${nstyle}`}
+                      ></div>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="button-cont">
+              <button type="submit">submit</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
 }
 
-export default Create
-
- 
+export default Create;

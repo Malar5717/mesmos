@@ -1,0 +1,242 @@
+.createComp {
+    height: 100vh;
+    width: 100vw;
+    position: fixed; 
+    /*  */
+    top: 0;
+    left: 0;
+    background-color: var(--buu);
+}
+
+.create_main {
+    height: 100%;
+    padding: 20px 8px 8px 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.create-title {
+    padding: 0px 10px 5px 10px;
+    color: whitesmoke;
+}
+
+#title {
+    background: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid whitesmoke;
+
+    color: white;
+    font-size: 1.2rem;
+    padding: 0;
+    field-sizing: content;
+    display: block;
+}
+
+#title::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.create-other {
+    background-color: var(--creame);
+    flex: 1; 
+    margin: 0px 10px 10px 10px;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.form-body {
+    flex-grow: 1;
+    display: flex;
+}
+
+.pola-type {
+    flex-basis: 10%;
+    padding: 7px;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+     >* { 
+        all: unset;
+        border: 1px solid var(--black);
+        border-radius: 8px;
+    }
+
+    > .type.active {
+        background-color: #E6DCA2;
+    }
+
+    > .type{
+        position: relative;
+
+        & .sqr{
+            height: 70%;
+            width: 45%;
+            border: 1px solid var(--black);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+
+            & .sqr{
+                height: 60%;
+                width: 75%;
+                top:40%;
+            }
+        }
+    }
+
+    > .type svg{
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(4);
+
+    }
+
+}
+
+.pola-type .memoroidPola {
+    flex-basis: 25%; 
+}
+
+.pola-type .notePola {
+    flex-basis: 25%;
+}
+
+.pola-type .space {
+    flex-grow: 1;
+}
+
+.pola-data {
+    flex-grow: 1;
+    display: flex;
+    gap: 8px;
+    padding: 8px;
+    padding-right: 0;
+}
+
+.pola-data .form-item:has(input[type='file']) {
+    flex-basis: 65%;
+    & input {
+        display: block;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+    }
+}
+
+.pola-data .form-item:has(textarea) {
+    flex: 1;
+}
+
+.pola-data .form-item {
+    border: 2px dashed rgba(0, 0, 0, 0.312);
+
+    border-radius: 4px;
+    position: relative;
+    & label {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 18px;
+        font-weight: 600;
+    }
+    & label.placeholder_show {
+        opacity: 1;
+    }
+    & label.placeholder_hide {
+        opacity: 0;
+    }
+}
+
+.pola-data .text-area {
+    border: 1px solid black;
+}
+
+textarea {
+    padding: 7px;
+    width: 100%;
+    height: 100%;
+    resize: none;
+    border: 0;
+    background-color: var(--creame);
+    font-size: 20px;
+}
+
+textarea:focus-within {
+    outline: 0;
+}
+
+.styling {
+    flex-basis: 20%;
+    display: flex;
+    border: 1px solid black;
+    padding: 10px 8px 8px 8px;
+    border-radius: 8px;
+}
+
+.note-styles-list, .memo-styles-list {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+    height: 100%;
+    justify-content: space-around;
+    align-items: center;
+    /* border: 2px solid green; */
+}
+
+.note-styles-list button,
+.memo-styles-list button {
+    flex: 1 1 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    margin: 0 auto;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.note-style, .memo-style {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    /* border: 1px solid lightcoral; */
+    box-sizing: border-box;
+}
+
+.styling .styles {
+    flex-basis: 85%;
+}
+
+.button-cont {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.button-cont button {
+    font-size: 18px;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: var(--buu);
+    color: white;
+}
+
+.note-styles, .memo-styles {
+    display: flex; 
+    gap: 10px;
+}

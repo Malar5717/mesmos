@@ -22,8 +22,11 @@ const genToken = (id, res) => {
 // sign up 
 user_router.post('/signup', async function (req, res) {
     try {
-        console.log(req.body)
         const { username, usermail, password } = req.body;
+
+        if(!username || !usermail || !password){
+            return  res.status(400).json({msg:"All fields are required!"});
+        }
 
         // User model is a class, assign it to the user object 
         const user = new User({ username, usermail, password });
@@ -32,7 +35,12 @@ user_router.post('/signup', async function (req, res) {
         genToken(user._id, res);
         res.status(201).json(user);
     } catch (err) {
+        if (err.code === 11000) {
+            // Duplicate key error (username or usermail already exists)
+            return res.status(400).json({ msg: "Username or email already exists!" });
+        }
         console.log(err);
+        res.status(500).json({ msg: "Server error. Please try again." });
     }
 });
 
@@ -40,6 +48,10 @@ user_router.post('/signup', async function (req, res) {
 user_router.post('/login', async function (req, res) {
     try {
         const { username, password } = req.body;
+
+        if(!username || !password){
+            return  res.status(400).json({msg:"All fields are required!"});
+        }
 
         // get the username from the DB
         const user = await User.findOne({ username });

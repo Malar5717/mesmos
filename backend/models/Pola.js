@@ -13,20 +13,14 @@ const polaSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true
+    },
+    image_url: {
+        type: String
+    },
+    style: {
+        type: String,
+        required: true
     }
-    // media_upload: {
-    //     type: String
-    // },
-    // location: {
-    //     type: {
-    //         type: String,
-    //         enum: ['Point'], 
-    //         default: 'Point'df  `
-    //     },
-    //     coordinates: {
-    //         type: [Number], 
-    //     }
-    // }
 
 }, {
     timestamps: true

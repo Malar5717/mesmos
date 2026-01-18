@@ -2,9 +2,9 @@ import React from "react";
 
 import "./TurnOff.css";
 
-function TurnOff() {
+function TurnOff({pos, popDelay}) {
   return (
-    <div className="TurnOff">
+    <div className="TurnOff" style={{ top: pos.top, left: pos.left, animationDelay: popDelay+"ms" }}>
       <div className="OuterBox">
         <p>Turn Off</p>
   
@@ -26,7 +26,7 @@ function TurnOff() {
           </div>
   
         </div>
-        
+      
       </div>
     </div>
   );

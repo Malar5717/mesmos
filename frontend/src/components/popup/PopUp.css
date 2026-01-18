@@ -9,7 +9,7 @@
     border-radius: 3px;
 }
 
-.PopUp .OuterBox > p {
+.PopUp .OuterBox > .close {
     background-color: red;
     margin: 1.5px; 
     margin-left: auto;
@@ -43,4 +43,12 @@
     border-radius: 4px;
 }
 
+.PopUp .OuterBox {
+    transform-origin: center;  
+    animation: pop 0.2s linear 0.1s both;
+}
 
+@keyframes pop {
+    from { transform: scale(0); }
+    to   { transform: scale(1); }
+}
