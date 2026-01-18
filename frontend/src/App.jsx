@@ -17,7 +17,7 @@ function App() {
         <Route path="/home" element={<HomeContent />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/my" element={<MyMemories />} />
+        <Route path="/pola/my" element={<MyMemories />} />
 
       </Routes>
     </div>

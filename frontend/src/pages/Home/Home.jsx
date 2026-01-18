@@ -28,8 +28,6 @@ const HomeContent = () => {
       <NavBar onAddClick={setIsCreateOpen} isCreateOpen={isCreateOpen} />
       <ResponsiveMasonry
         columnsCountBreakPoints={{
-          0: 2,
-          600: 3,
           900: 4,
           1200: 5,
         }}

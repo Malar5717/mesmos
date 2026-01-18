@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import './NavBar.css'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 
 function NavBar({ onAddClick, isCreateOpen }) {
 
@@ -26,7 +26,7 @@ function NavBar({ onAddClick, isCreateOpen }) {
         {isVerified && 
           <>
             <p onClick={() => onAddClick(!isCreateOpen)}>create</p> 
-            <p>my memories</p>
+            <Link to="/pola/my">my memories</Link>
           </>
         }
     
