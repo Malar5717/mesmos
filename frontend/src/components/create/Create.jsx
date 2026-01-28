@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Create.css";
 
 const nstyles = ["plain-parch", "cubed", "legal-pad", "sticky-note", "dotted"];
@@ -15,10 +15,18 @@ function Create({ setIsCreateOpen }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
-  const [style, setStyle] = useState(1);
+  const [style, setStyle] = useState(nstyles[0]);
   const [error, setError] = useState("");
 
-  const [polaType, setPolaType] = useState("default");
+  const [polaType, setPolaType] = useState("note");
+  
+  useEffect(() => {
+    if (polaType === "memo") {
+      setStyle(mstyles[0]);
+    } else if (polaType === "note") {
+      setStyle(nstyles[0]);
+    }
+  }, [polaType]);
 
   const handleSubmit = (e) => {
     console.log("--- Create form submitted ---");
