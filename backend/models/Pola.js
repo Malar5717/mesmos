@@ -26,6 +26,9 @@ const polaSchema = new mongoose.Schema({
     timestamps: true
 })
 
+polaSchema.index({ createdAt: -1 });
+polaSchema.index({ user: 1, createdAt: -1 });
+
 const Pola = mongoose.model('Pola',polaSchema);
 
 module.exports = Pola;

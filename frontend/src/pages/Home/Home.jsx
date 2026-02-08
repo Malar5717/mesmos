@@ -10,18 +10,24 @@ import "./Home.css";
 
 const HomeContent = () => {
   const [polas, setPolas] = useState([]);
-  const [isCreateOpen, setIsCreateOpen] = useState(false); // for conditional rendering
+  const [isCreateOpen, setIsCreateOpen] = useState(false); 
 
   useEffect(() => {
     const fetchPolas = () => {
       axios
         .get("http://localhost:3000/pola/all")
-        .then((res) => setPolas(res.data))
-        .catch((err) => console.log(err));
+        .then((res) => setPolas(res.data));
     };
     fetchPolas();
-  }, [isCreateOpen]);
-  // dependency array to ensure fetch on every change
+
+    const pollInterval = setInterval(fetchPolas, 10000);
+
+    // once its unmounted 
+    return () => {
+      clearInterval(pollInterval);
+    };
+
+  }, []);
 
   return (
     <>

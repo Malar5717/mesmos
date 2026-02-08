@@ -19,8 +19,19 @@
 }
 
 .navbar_main .account a {
-    font-size: 18px;
-    font-weight: 600;
     text-decoration: none;
     color: var(--black);
+}
+
+.account p {
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--black);
+}
+
+.material-symbols-outlined {
+    color: red;
+    font-size: 17px;
+    margin-bottom: 3px;
+    cursor: pointer;
 }

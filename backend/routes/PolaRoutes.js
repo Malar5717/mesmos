@@ -1,5 +1,6 @@
 const Pola = require('../models/Pola');
 const pola_router = require('express').Router();
+const { getAll, getMyMemories, getOne } = require('../controllers/PolaController');
 const decToken = require('../middleware/decToken');
 const User = require('../models/User');
 const multer = require('multer');
@@ -51,51 +52,15 @@ pola_router.post('/create', decToken, upload.single('image'), async (req, res) =
     }
     catch (err) {
         console.log('Error in /create route:', err);
+        return res.status(500).json({ msg: "server error" });
     }
 })
 
-// 02 -R- read 
-pola_router.get('/all', async (req, res) => {
-    try {
-        const polas = await Pola.find({}).sort({ createdAt: -1 }) // newest first
-        if (polas.length === 0) {
-            return res.status(404).json({ msg: "empty, nothing to display" })
-        }
-        return res.status(200).json(polas)
-    }
-    catch (err) {
-        console.log(err);
-    }
-})
+pola_router.get('/all', getAll);
 
-// id can reach unverified persons 
-pola_router.get('/my', decToken, async (req, res) => {
-    try {
-        const id = req.decodedUserId
-        const polas = await Pola.find({ user: id }).sort({ createdAt: -1 })
-        if (polas.length === 0) {
-            return res.status(404).json({ msg: "empty, nothing to display" })
-        }
-        return res.status(200).json(polas)
-    }
-    catch (err) {
-        console.log(err);
-    }
-})
+pola_router.get('/my', decToken, getMyMemories);
 
-pola_router.get('/:id', async (req, res) => {
-    try {
-        const id = req.params.id
-        const pola = await Pola.findById(id)
-        if (!pola) {
-            return res.status(404).json({ msg: "empty" })
-        }
-        return res.status(200).json(pola.populate("user", "username"))
-    }
-    catch (err) {
-        console.log(err);
-    }
-})
+pola_router.get('/:id', getOne);
 
 // 03 -U- update 
 pola_router.put('/:id', decToken, async (req, res) => {
@@ -117,6 +82,7 @@ pola_router.put('/:id', decToken, async (req, res) => {
     }
     catch (err) {
         console.log(err)
+        return res.status(500).json({ msg: "server error" });
     }
 })
 
@@ -136,6 +102,7 @@ pola_router.delete('/:id', decToken, async (req, res) => {
     }
     catch (err) {
         console.log(err)
+        return res.status(500).json({ msg: "server error" });
     }
 })
 
