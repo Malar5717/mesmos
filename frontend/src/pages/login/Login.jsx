@@ -9,24 +9,29 @@ export default function Login() {
   const nav = useNavigate();
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // form refreshes upon submit
+    e.preventDefault();
+
     if (!username || !password) {
       return;
     }
 
-    // cant use form data
     axios
       .post(
         "http://localhost:3000/user/login",
         { username, password },
-        { withCredentials: true }
+        { withCredentials: true },
       )
-      .then((res) => {
+      .then(() => {
         nav("/home");
       })
       .catch((err) => {
         console.log(err);
       });
+  };
+  
+  const handleCancel = () => {
+    setUsername("");
+    setPassword("");
   };
 
   return (
@@ -35,39 +40,39 @@ export default function Login() {
 
         <div className="form_header">
           <h1>Login</h1>
-          <button>×</button>
+          <button onClick={() => nav(-1)}>×</button>
         </div>
-  
-          <form className="login_form" onSubmit={handleSubmit}>
+
+        <form className="login_form" onSubmit={handleSubmit}>
+          <div className="form_body">
             
-            <div className="form_body">
-              <div className="form_item">
-                <label htmlFor="username">Username:</label>
-                <input
-                  type="text"
-                  id="username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                ></input>
-              </div>
-    
-              <div className="form_item">
-                <label htmlFor="password">Password:</label>
-                <input
-                  type="password"
-                  id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                ></input>
-              </div>
-            </div>
-  
-            <div className="actions">
-              <button type="submit">ok</button>
-              <button>cancel</button>
+            <div className="form_item">
+              <label htmlFor="username">Username:</label>
+              <input
+                type="text"
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              ></input>
             </div>
 
-          </form>
+            <div className="form_item">
+              <label htmlFor="password">Password:</label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              ></input>
+            </div>
+          </div>
+
+          <div className="actions">
+            <button type="submit">ok</button>
+            <button type="button" onClick={handleCancel}>cancel</button>
+          </div>
+
+        </form>
       </div>
     </div>
   );

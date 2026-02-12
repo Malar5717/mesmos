@@ -20,6 +20,10 @@ const polaSchema = new mongoose.Schema({
     style: {
         type: String,
         required: true
+    },
+    isPrivate: {
+        type: Boolean,
+        default: false
     }
 
 }, {

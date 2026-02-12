@@ -1,6 +1,6 @@
 const Pola = require('../models/Pola');
 const pola_router = require('express').Router();
-const { getAll, getMyMemories, getOne } = require('../controllers/PolaController');
+const { create, getAll, getMyMemories, getOne } = require('../controllers/PolaController');
 const decToken = require('../middleware/decToken');
 const User = require('../models/User');
 const multer = require('multer');
@@ -22,40 +22,10 @@ const storage = new CloudinaryStorage({
 // upload middleware
 const upload = multer({ storage });
 
-// 01 -C- create 
-pola_router.post('/create', decToken, upload.single('image'), async (req, res) => {
-    try {
-        console.log('--- /create route hit ---');
-        console.log('Request body:', req.body);
-        console.log('Request file:', req.file);
-        console.log('Decoded user ID:', req.decodedUserId);
+// C- create 
+pola_router.post('/create', decToken, upload.single('image'), create);
 
-        const { title, description, style } = req.body;
-        // check for valid user
-        const user = await User.findById(req.decodedUserId)
-        if (!user) {
-            console.log('User not found for ID:', req.decodedUserId);
-            return res.status(500).json({ msg: "user not found" })
-        }
-        if (!title || !description) {
-            console.log('Missing required fields:', { title, description });
-            return res.status(500).json({ msg: "provide required fields" })
-        }
-
-        const image_url = req.file ? req.file.path : null;
-        console.log('Image URL to save:', image_url);
-
-        const pola = new Pola({ title, description, user: user._id, image_url, style })
-        await pola.save()
-        console.log('Pola created:', pola);
-        return res.status(201).json(pola)
-    }
-    catch (err) {
-        console.log('Error in /create route:', err);
-        return res.status(500).json({ msg: "server error" });
-    }
-})
-
+// R- read
 pola_router.get('/all', getAll);
 
 pola_router.get('/my', decToken, getMyMemories);
@@ -68,7 +38,7 @@ pola_router.put('/:id', decToken, async (req, res) => {
         const id = req.params.id
         const pola = await Pola.findById(id)
         if (pola.user != req.decodedUserId) {
-            return res.status(403).json({ msg: "forbidden" })
+            return res.status(403).json({ msg: "forbidden" });
         }
         const { title, description } = req.body
         const updateObj = {}

@@ -221,6 +221,30 @@ textarea:focus-within {
     flex-basis: 85%;
 }
 
+.button-priv {
+    margin-left: auto;
+    padding: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.button-priv button {
+  border: none;
+  background: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.button-priv .material-symbols-outlined {
+    color: var(--big-gey);
+    padding: 10px;
+    margin-bottom: -3px;
+    border-radius: 8px;
+    font-size: 18px;
+    background-color: var(--gey);
+}
+
 .button-cont {
     flex: 1;
     display: flex;
@@ -228,9 +252,10 @@ textarea:focus-within {
     align-items: flex-end;
 }
 
-.button-cont button {
+.button-cont > button {
     font-size: 18px;
-    padding: 8px;
+    padding: 8px 16px;
+    margin-left: 1px;
     border-radius: 5px;
     background-color: var(--buu);
     color: white;

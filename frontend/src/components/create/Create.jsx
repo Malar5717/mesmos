@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./Create.css";
 
 const nstyles = ["plain-parch", "cubed", "legal-pad", "sticky-note", "dotted"];
@@ -8,7 +8,7 @@ const mstyles = [
   "double-taped",
   "paper-pinned",
   "sweet-heart",
-  "holes-punched"
+  "holes-punched",
 ];
 
 function Create({ setIsCreateOpen }) {
@@ -19,7 +19,9 @@ function Create({ setIsCreateOpen }) {
   const [error, setError] = useState("");
 
   const [polaType, setPolaType] = useState("note");
-  
+
+  const [isPrivate, setIsPrivate] = useState(false);
+
   useEffect(() => {
     if (polaType === "memo") {
       setStyle(mstyles[0]);
@@ -29,29 +31,26 @@ function Create({ setIsCreateOpen }) {
   }, [polaType]);
 
   const handleSubmit = (e) => {
-    console.log("--- Create form submitted ---");
-    e.preventDefault(); // form refreshes upon submit
+    e.preventDefault();
     setError("");
+
     if (!title || !description) {
       setError("Title and description are required.");
       return;
     }
-    // feature of browser
+
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
     formData.append("image", image);
     formData.append("style", style);
-
+    formData.append("isPrivate", isPrivate);
     axios
       .post("http://localhost:3000/pola/create", formData, {
         withCredentials: true,
       })
       .then(() => {
         setIsCreateOpen(false);
-      })
-      .catch((err) => {
-        console.log(err);
       });
   };
 
@@ -65,6 +64,7 @@ function Create({ setIsCreateOpen }) {
           {error}
         </div>
       )}
+
       <form className="create_main" onSubmit={handleSubmit}>
         <div className="create-title">
           <div className="form-item">
@@ -130,7 +130,6 @@ function Create({ setIsCreateOpen }) {
                   ></input>
                 </div>
               )}
-
               {polaType != "default" && (
                 <div className="form-item">
                   <label
@@ -151,7 +150,6 @@ function Create({ setIsCreateOpen }) {
                   ></textarea>
                 </div>
               )}
-
               {polaType === "default" && (
                 <div className="form-item">
                   <label className={"placeholder_hide"} htmlFor="description">
@@ -191,9 +189,7 @@ function Create({ setIsCreateOpen }) {
                         width: "50%",
                       }}
                     >
-                      <div
-                        className={`memo-style ${mstyle}`}
-                      ></div>
+                      <div className={`memo-style ${mstyle}`}></div>
                     </button>
                   ))}
                 </div>
@@ -213,10 +209,8 @@ function Create({ setIsCreateOpen }) {
                             : "1px solid #ccc",
                         background: "none",
                       }}
-                    >       
-                      <div
-                        className={`note-style ${nstyle}`}
-                      ></div>
+                    >
+                      <div className={`note-style ${nstyle}`}></div>
                     </button>
                   ))}
                 </div>
@@ -224,11 +218,31 @@ function Create({ setIsCreateOpen }) {
             </div>
 
             <div className="button-cont">
-              <button type="submit">submit</button>
+              
+              <div className="button-priv">
+                
+                <button type="button" onClick={() => setIsPrivate(!isPrivate)}>
+                  <span
+                    className="material-symbols-outlined"
+                    title={isPrivate ? "private" : "public"}
+                  >
+                    {/* the text that fot renders as icon glyph  */}
+                    {isPrivate ? "lock_person" : "lock_open_right"}
+                  </span>
+                </button>
+
+              </div>
+
+              <button type="submit" className="submit">submit</button>
+            
             </div>
+
           </div>
+
         </div>
+
       </form>
+
     </div>
   );
 }

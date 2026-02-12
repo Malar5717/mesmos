@@ -19,6 +19,7 @@ const signup = async (req, res) => {
         const user = new User({ username, usermail, password });
 
         await user.save();
+        // auto-login 
         genToken(user._id, res);
 
         res.status(201).json(user);
@@ -69,7 +70,7 @@ const logout = async (req, res) => {
         sameSite: 'lax' 
     });
     res.status(200).json({ msg: "Logged out successfully" });
-}
+};
 
 const verifyUser = async (req, res) => {
     try {
