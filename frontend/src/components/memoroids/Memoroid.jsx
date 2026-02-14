@@ -8,6 +8,8 @@ function Memoroid({
   image_url,
   style,
   isEditing = false,
+
+  // not passed? keep as default empty function 
   onTitleChange = () => {},
   onDescChange = () => {},
 }) {

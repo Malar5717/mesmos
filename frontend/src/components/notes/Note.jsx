@@ -1,5 +1,6 @@
-import React, { useRef, useMemo } from "react";
+import React, { useMemo } from "react";
 import { formatDate } from "../../utils/genDate";
+import "./Note.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
@@ -10,12 +11,12 @@ export default function Note({
   createdAt,
   style,
   isEditing = false,
+
   onTitleChange = () => {},
   onDescChange = () => {},
 }) {
   // const [expanded, setExpanded] = useState(false);
   // const [showReadMore, setShowReadMore] = useState(false);
-  const contentRef = useRef(null);
   const istDate = useMemo(() => formatDate(createdAt), [createdAt]);
 
   /* Read more feature commented out
@@ -37,26 +38,24 @@ export default function Note({
           <FontAwesomeIcon icon={faHeart} style={{ color: "#aa3108" }} />
         </div>
       )}
+      {/* not applied. why  */}
+
       {isEditing ? (
         <>
-          <input type="text" value={title} onChange={onTitleChange} />
-          <textarea value={description} onChange={onDescChange} />
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => onTitleChange(e.target.value)}
+          />
+          <textarea
+            value={description}
+            onChange={(e) => onDescChange(e.target.value)}
+          />
         </>
       ) : (
         <>
           <h1>{title}</h1>
-          <div
-            ref={contentRef}
-            style={{
-              // maxHeight: expanded ? (contentRef.current ? contentRef.current.scrollHeight : 'none') : 120,
-              maxHeight: 120,
-              overflow: 'hidden',
-              transition: 'max-height 0.3s',
-              whiteSpace: 'pre-line',
-            }}
-          >
-            {description}
-          </div>
+          <div className="description">{description}</div>
           {/* Read more feature commented out
           {showReadMore && !expanded && (
             <button

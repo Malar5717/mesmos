@@ -10,18 +10,18 @@ import "./Home.css";
 
 const HomeContent = () => {
   const [polas, setPolas] = useState([]);
-  const [isCreateOpen, setIsCreateOpen] = useState(false); 
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
+
+  const fetchPolas = () => {
+    axios
+      .get("http://localhost:3000/pola/all")
+      .then((res) => setPolas(res.data));
+  };
 
   useEffect(() => {
-    const fetchPolas = () => {
-      axios
-        .get("http://localhost:3000/pola/all")
-        .then((res) => setPolas(res.data));
-    };
     fetchPolas();
 
-    const pollInterval = setInterval(fetchPolas, 10000);
-
+    const pollInterval = setInterval(fetchPolas, 5000);
     // once its unmounted 
     return () => {
       clearInterval(pollInterval);
@@ -64,7 +64,7 @@ const HomeContent = () => {
         </Masonry>
       </ResponsiveMasonry>
 
-      {isCreateOpen && <Create setIsCreateOpen={setIsCreateOpen} />}
+      {isCreateOpen && <Create setIsCreateOpen={setIsCreateOpen} setPolas={setPolas} />}
     </>
   );
 };

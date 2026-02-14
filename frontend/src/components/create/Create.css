@@ -245,6 +245,11 @@ textarea:focus-within {
     background-color: var(--gey);
 }
 
+.button-priv .material-symbols-outlined.lock_person {
+    background-color: rgb(245, 245, 175);
+    color: var(--buu);
+}
+
 .button-cont {
     flex: 1;
     display: flex;

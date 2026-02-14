@@ -11,7 +11,7 @@ const mstyles = [
   "holes-punched",
 ];
 
-function Create({ setIsCreateOpen }) {
+function Create({ setIsCreateOpen, setPolas }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
@@ -51,6 +51,9 @@ function Create({ setIsCreateOpen }) {
       })
       .then(() => {
         setIsCreateOpen(false);
+        axios
+          .get("http://localhost:3000/pola/all")
+          .then((res) => setPolas(res.data));
       });
   };
 
@@ -223,7 +226,7 @@ function Create({ setIsCreateOpen }) {
                 
                 <button type="button" onClick={() => setIsPrivate(!isPrivate)}>
                   <span
-                    className="material-symbols-outlined"
+                    className={`material-symbols-outlined ${isPrivate ? "lock_person" : "lock_open_right"}`}
                     title={isPrivate ? "private" : "public"}
                   >
                     {/* the text that fot renders as icon glyph  */}

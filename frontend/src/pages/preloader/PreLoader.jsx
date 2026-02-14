@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "./PreLoader.css";
 
@@ -8,11 +8,6 @@ import TurnOff from "../../components/popup/TurnOff";
 import Canvas from "../../components/popup/Canvas";
 
 function PreLoader() {
-  const [isClose, setIsClose] = useState(false);
-
-  const handleClose = () => {
-    setIsClose(true);
-  }
 
   // function to render randomised popups
   function renderPopUps() {
@@ -82,20 +77,17 @@ function PreLoader() {
         pos={pos[randInt][idx]}
         pop={pop} // popups[idx] extracted from .map()
         popDelay={(idx+1)*100}
-        onClose={handleClose}
       />
     ));
     PopUps.push(<TurnOff key={4} pos={pos[randInt][4]} />);
-    PopUps.push(<Canvas key={5} pos={pos[randInt][5]} onClose={handleClose} />);
+    PopUps.push(<Canvas key={5} pos={pos[randInt][5]} />);
     return PopUps;
   }
 
   return (
     <div>
-      {/* {!isClose && renderPopUps()} */}
       {renderPopUps()}
       <MainPopUp />
-      {/* {!isClose && <MainPopUp onClose={handleClose} />} */}
     </div>
   );
 }
