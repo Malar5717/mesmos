@@ -1,4 +1,5 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useMemo } from "react";
+import { formatDate } from "../../utils/genDate";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
@@ -12,29 +13,12 @@ export default function Note({
   onTitleChange = () => {},
   onDescChange = () => {},
 }) {
-  const [expanded, setExpanded] = useState(false);
-  const [showReadMore, setShowReadMore] = useState(false);
+  // const [expanded, setExpanded] = useState(false);
+  // const [showReadMore, setShowReadMore] = useState(false);
   const contentRef = useRef(null);
-  let istDate = "";
-  if (createdAt) {
-    const date = new Date(createdAt);
-    if (!isNaN(date.getTime())) {
-      istDate = new Intl.DateTimeFormat("en-IN", {
-        timeZone: "Asia/Kolkata",
-        hour: "2-digit",
-        minute: "2-digit",
-        day: "2-digit",
-        month: "2-digit",
-        year: "2-digit",
-        hour12: false,
-      }).format(date);
-    } else {
-      istDate = "Invalid date";
-    }
-  } else {
-    istDate = "No date";
-  }
+  const istDate = useMemo(() => formatDate(createdAt), [createdAt]);
 
+  /* Read more feature commented out
   useEffect(() => {
     if (contentRef.current && contentRef.current.scrollHeight > 120) {
       setShowReadMore(true);
@@ -42,6 +26,7 @@ export default function Note({
       setShowReadMore(false);
     }
   }, [description]);
+  */
 
   return (
     <div className={`pola ${style}`} style={{ maxWidth: 400 }}>
@@ -63,7 +48,8 @@ export default function Note({
           <div
             ref={contentRef}
             style={{
-              maxHeight: expanded ? (contentRef.current ? contentRef.current.scrollHeight : 'none') : 120,
+              // maxHeight: expanded ? (contentRef.current ? contentRef.current.scrollHeight : 'none') : 120,
+              maxHeight: 120,
               overflow: 'hidden',
               transition: 'max-height 0.3s',
               whiteSpace: 'pre-line',
@@ -71,6 +57,7 @@ export default function Note({
           >
             {description}
           </div>
+          {/* Read more feature commented out
           {showReadMore && !expanded && (
             <button
               onClick={() => setExpanded(true)}
@@ -79,6 +66,7 @@ export default function Note({
               Read more
             </button>
           )}
+          */}
         </>
       )}
       <p className="dt">{istDate}</p>

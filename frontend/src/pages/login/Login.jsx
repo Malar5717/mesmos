@@ -6,12 +6,15 @@ import "./Login.css";
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const nav = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setError("");
 
     if (!username || !password) {
+      setError("Please fill in all fields.");
       return;
     }
 
@@ -25,6 +28,7 @@ export default function Login() {
         nav("/home");
       })
       .catch((err) => {
+        setError("Invalid username or password.");
         console.log(err);
       });
   };
@@ -32,6 +36,7 @@ export default function Login() {
   const handleCancel = () => {
     setUsername("");
     setPassword("");
+    setError("");
   };
 
   return (
@@ -45,7 +50,6 @@ export default function Login() {
 
         <form className="login_form" onSubmit={handleSubmit}>
           <div className="form_body">
-            
             <div className="form_item">
               <label htmlFor="username">Username:</label>
               <input
@@ -74,6 +78,15 @@ export default function Login() {
 
         </form>
       </div>
+
+      {error && (
+        <div
+          className="error-message"
+          style={{ color: "red", marginTop: "0px" }}
+        >
+          {error}
+        </div>
+      )}
     </div>
   );
 }

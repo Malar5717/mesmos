@@ -2,11 +2,13 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./NavBar.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 // conditional rendering
 function NavBar({ onAddClick, isCreateOpen }) {
   const [isVerified, setIsVerified] = useState(false);
+  const location = useLocation();
+  const inMyMemories = location.pathname === "/pola/my";
 
   useEffect(() => {
     const isAuth = () => {
@@ -23,14 +25,22 @@ function NavBar({ onAddClick, isCreateOpen }) {
       <div className="logo">
         <p>mesmos</p>
       </div>
+
       <div className="account">
-        {isVerified && (
+        {isVerified && inMyMemories && (
           <>
-          {/* to do: its toggle, but you can't really close create after opening it  */}
+            <Link to="/home">home</Link>
+          </>
+        )}
+
+        {isVerified && !inMyMemories && (
+          <>
+            {/* to do: its toggle, but you can't really close create after opening it  */}
             <p onClick={() => onAddClick(!isCreateOpen)}>create</p>
             <Link to="/pola/my">my memories</Link>
+
             <span
-            className="material-symbols-outlined"
+              className="material-symbols-outlined"
               onClick={() =>
                 axios
                   .get("http://localhost:3000/user/logout", {
