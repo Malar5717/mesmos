@@ -9,7 +9,7 @@ import Memoroid from "../../components/memoroids/Memoroid";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const MyMemories = () => {
   const [polas, setPolas] = useState([]);
@@ -32,9 +32,8 @@ const MyMemories = () => {
 
   const handleEdit = (id, editData) => {
     axios
-      .put(
-        `http://localhost:3000/pola/${id}`,
-        editData,
+      .put(`http://localhost:3000/pola/${id}`, 
+        editData, 
         { withCredentials: true }
       )
       .then(() => {
@@ -59,6 +58,23 @@ const MyMemories = () => {
       .catch((err) => setError(err.response?.data || err));
   };
 
+  const handlePrivacy = (id) => {
+    const pola = polas.find((p) => p._id === id);
+    axios
+      .put(
+        `http://localhost:3000/pola/${id}`,
+        { isPrivate: !pola.isPrivate },
+        { withCredentials: true }
+      )
+      .then(() => {
+        const polas_copy = [...polas];
+        const index = polas_copy.findIndex((p) => p._id === id);
+        polas_copy[index].isPrivate = !polas_copy[index].isPrivate;
+        setPolas(polas_copy);
+      })
+      .catch((err) => setError(err.response?.data || err));
+  };
+
   return (
     <>
       <NavBar onAddClick={setIsCreateOpen} isCreateOpen={isCreateOpen} />
@@ -73,18 +89,22 @@ const MyMemories = () => {
       >
         <Masonry>
           {polas.map((pola) => {
-            const isEditing = isEditOpen && editPola && editPola._id === pola._id;
+            const isEditing =
+              isEditOpen && editPola && editPola._id === pola._id;
             return (
               <div key={pola._id} className="masonry-item">
                 <>
                   {pola.image_url ? (
                     <Memoroid
-                    // title={ isEditing ? (e) => setEdittedTitle(e.target.value) : pola.title }
+                      // title={ isEditing ? (e) => setEdittedTitle(e.target.value) : pola.title }
                       title={isEditing ? edittedTitle : pola.title}
-                      description={isEditing ? edittedDescription : pola.description}
+                      description={
+                        isEditing ? edittedDescription : pola.description
+                      }
                       image_url={pola.image_url}
                       createdAt={pola.createdAt}
                       style={pola.style}
+                      isPrivate={pola.isPrivate}
                       isEditing={isEditing}
                       onTitleChange={setEdittedTitle}
                       onDescChange={setEdittedDescription}
@@ -92,15 +112,30 @@ const MyMemories = () => {
                   ) : (
                     <Note
                       title={isEditing ? edittedTitle : pola.title}
-                      description={isEditing ? edittedDescription : pola.description}
+                      description={
+                        isEditing ? edittedDescription : pola.description
+                      }
                       createdAt={pola.createdAt}
                       style={pola.style}
+                      isPrivate={pola.isPrivate}
                       isEditing={isEditing}
                       onTitleChange={setEdittedTitle}
                       onDescChange={setEdittedDescription}
                     />
                   )}
-                  {isEditing && <button className="controls" onClick={() => handleEdit(pola._id, { title: edittedTitle, description: edittedDescription })}>save</button>}
+                  {isEditing && (
+                    <button
+                      className="controls"
+                      onClick={() =>
+                        handleEdit(pola._id, {
+                          title: edittedTitle,
+                          description: edittedDescription,
+                        })
+                      }
+                    >
+                      save
+                    </button>
+                  )}
                 </>
                 <div className="controls">
                   <FontAwesomeIcon
@@ -112,7 +147,17 @@ const MyMemories = () => {
                       setEdittedDescription(pola.description);
                     }}
                   />
-                  <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(pola._id)} />
+
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    onClick={() => handleDelete(pola._id)}
+                  />
+
+                  <FontAwesomeIcon
+                    icon={pola.isPrivate ? faEyeSlash : faEye}
+                    onClick={() => handlePrivacy(pola._id)}
+                  />
+
                 </div>
               </div>
             );

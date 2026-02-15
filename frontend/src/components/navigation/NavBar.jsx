@@ -41,6 +41,7 @@ function NavBar({ onAddClick, isCreateOpen }) {
 
             <span
               className="material-symbols-outlined"
+              title="logout"
               onClick={() =>
                 axios
                   .get("http://localhost:3000/user/logout", {

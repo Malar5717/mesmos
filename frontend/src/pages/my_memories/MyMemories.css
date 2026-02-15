@@ -8,6 +8,7 @@
 
 .controls {
     margin: 10px;
+    cursor: pointer;
 }
 
 button {

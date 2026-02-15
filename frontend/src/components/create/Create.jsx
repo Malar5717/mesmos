@@ -16,11 +16,10 @@ function Create({ setIsCreateOpen, setPolas }) {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [style, setStyle] = useState(nstyles[0]);
+  const [isPrivate, setIsPrivate] = useState(false);
   const [error, setError] = useState("");
 
   const [polaType, setPolaType] = useState("note");
-
-  const [isPrivate, setIsPrivate] = useState(false);
 
   useEffect(() => {
     if (polaType === "memo") {
@@ -87,6 +86,7 @@ function Create({ setIsCreateOpen, setPolas }) {
             <div className="pola-type">
               <div
                 type="radio"
+                title="photo memory"
                 className={`type memoroidPola ${
                   polaType === "memo" ? "active" : ""
                 }`}
@@ -96,8 +96,10 @@ function Create({ setIsCreateOpen, setPolas }) {
                   <div className="sqr"></div>
                 </div>
               </div>
+
               <div
                 type="radio"
+                title="written memory"
                 className={`type notePola ${
                   polaType === "note" ? "active" : ""
                 }`}
@@ -116,6 +118,7 @@ function Create({ setIsCreateOpen, setPolas }) {
                   />
                 </svg>
               </div>
+
               <div className="space"></div>
             </div>
 
@@ -133,6 +136,7 @@ function Create({ setIsCreateOpen, setPolas }) {
                   ></input>
                 </div>
               )}
+
               {polaType != "default" && (
                 <div className="form-item">
                   <label
@@ -221,9 +225,7 @@ function Create({ setIsCreateOpen, setPolas }) {
             </div>
 
             <div className="button-cont">
-              
               <div className="button-priv">
-                
                 <button type="button" onClick={() => setIsPrivate(!isPrivate)}>
                   <span
                     className={`material-symbols-outlined ${isPrivate ? "lock_person" : "lock_open_right"}`}
@@ -233,19 +235,15 @@ function Create({ setIsCreateOpen, setPolas }) {
                     {isPrivate ? "lock_person" : "lock_open_right"}
                   </span>
                 </button>
-
               </div>
 
-              <button type="submit" className="submit">submit</button>
-            
+              <button type="submit" className="submit">
+                submit
+              </button>
             </div>
-
           </div>
-
         </div>
-
       </form>
-
     </div>
   );
 }

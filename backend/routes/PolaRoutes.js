@@ -40,12 +40,14 @@ pola_router.put('/:id', decToken, async (req, res) => {
         if (pola.user != req.decodedUserId) {
             return res.status(403).json({ msg: "forbidden" });
         }
-        const { title, description } = req.body
+        const { title, description, isPrivate } = req.body
         const updateObj = {}
         if (title) {
             updateObj['title'] = title
         } if (description) {
             updateObj['description'] = description
+        } if (isPrivate !== undefined) {
+            updateObj['isPrivate'] = isPrivate
         }
         const updatedPola = await Pola.findByIdAndUpdate(id, updateObj, { new: true })
         return res.status(200).json(updatedPola)
