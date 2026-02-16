@@ -11,11 +11,15 @@ import "./Home.css";
 const HomeContent = () => {
   const [polas, setPolas] = useState([]);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const fetchPolas = () => {
     axios
       .get("http://localhost:3000/pola/all")
-      .then((res) => setPolas(res.data));
+      .then((res) => {
+        setPolas(res.data);
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -32,37 +36,41 @@ const HomeContent = () => {
   return (
     <>
       <NavBar onAddClick={setIsCreateOpen} isCreateOpen={isCreateOpen} />
-      <ResponsiveMasonry
-        columnsCountBreakPoints={{
-          900: 4,
-          1200: 5,
-        }}
-      >
-        <Masonry>
-          {polas.map((pola, i) => {
-            return (
-              <div key={i} className="masonry-item">
-                {pola.image_url ? (
-                  <Memoroid
-                    title={pola.title}
-                    description={pola.description}
-                    image_url={pola.image_url}
-                    createdAt={pola.createdAt}
-                    style={pola.style}
-                  />
-                ) : (
-                  <Note
-                    title={pola.title}
-                    description={pola.description}
-                    createdAt={pola.createdAt}
-                    style={pola.style}
-                  />
-                )}
-              </div>
-            );
-          })}
-        </Masonry>
-      </ResponsiveMasonry>
+      {loading ? (
+        <span className="material-symbols-outlined spinner">progress_activity</span>
+      ) : (
+        <ResponsiveMasonry
+          columnsCountBreakPoints={{
+            900: 4,
+            1200: 5,
+          }}
+        >
+          <Masonry>
+            {polas.map((pola, i) => {
+              return (
+                <div key={i} className="masonry-item">
+                  {pola.image_url ? (
+                    <Memoroid
+                      title={pola.title}
+                      description={pola.description}
+                      image_url={pola.image_url}
+                      createdAt={pola.createdAt}
+                      style={pola.style}
+                    />
+                  ) : (
+                    <Note
+                      title={pola.title}
+                      description={pola.description}
+                      createdAt={pola.createdAt}
+                      style={pola.style}
+                    />
+                  )}
+                </div>
+              );
+            })}
+          </Masonry>
+        </ResponsiveMasonry>
+      )}
 
       {isCreateOpen && <Create setIsCreateOpen={setIsCreateOpen} setPolas={setPolas} />}
     </>

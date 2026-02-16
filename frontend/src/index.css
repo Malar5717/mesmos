@@ -30,16 +30,22 @@ body {
 }
 
 .legal-pad h1,
-.legal-pad p {
+.legal-pad .description {
     padding-left: 42px;
 }
 
 .sweet-heart {
     background-color: #FCE4EC;
 }
-/* sweatheart  */
-.heart { 
-    text-align: right; 
+
+.hearts {
+    display: flex;
+    flex-direction: row-reverse;
+    bottom: 0;
+}
+
+.heart {
+    color: rgba(255, 0, 0, 0.582) !important;
 }
 
 .dotted {

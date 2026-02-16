@@ -3,3 +3,17 @@
     max-width: 18%;
     word-break: break-all;
 }
+
+.spinner {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    color: #999;        
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}

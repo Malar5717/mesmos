@@ -21,6 +21,14 @@ function Memoroid({
       <img src={image_url} alt={title} />
       <p className="dt">{istDate}</p>
 
+      {style === "sweet-heart" && (
+        <div className="hearts">
+          <span className="material-symbols-outlined heart">favorite</span>
+          <span className="material-symbols-outlined heart">favorite</span>
+          <span className="material-symbols-outlined heart">heart_smile</span>
+        </div>
+      )}
+
       {isEditing ? (
         <>
           <input

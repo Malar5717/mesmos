@@ -18,6 +18,7 @@ function Create({ setIsCreateOpen, setPolas }) {
   const [style, setStyle] = useState(nstyles[0]);
   const [isPrivate, setIsPrivate] = useState(false);
   const [error, setError] = useState("");
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const [polaType, setPolaType] = useState("note");
 
@@ -78,6 +79,13 @@ function Create({ setIsCreateOpen, setPolas }) {
               onChange={(e) => setTitle(e.target.value)}
               onFocus={() => setError("")}
             ></input>
+            <button
+              type="button"
+              className="close"
+              onClick={() => setShowConfirm(true)}
+            >
+              X
+            </button>
           </div>
         </div>
 
@@ -244,6 +252,37 @@ function Create({ setIsCreateOpen, setPolas }) {
           </div>
         </div>
       </form>
+
+      {showConfirm && (
+        <div className="create-confirm" onClick={() => setShowConfirm(false)}>
+          <div
+            className="create-confirm-box"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <p>Are you sure?</p>
+            <div className="create-confirm-actions">
+              <button
+                type="button"
+                className="onYes"
+                onClick={() => {
+                  setIsCreateOpen(false);
+                  setShowConfirm(false);
+                }}
+              >
+                yes
+              </button>
+              <button 
+                type="button" 
+                className="onNo"
+                onClick={() => { 
+                  setShowConfirm(false);
+                }}>
+                no
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
