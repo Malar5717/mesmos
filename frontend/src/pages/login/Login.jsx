@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import "./Login.css";
+import API_URL from "../../config/api";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -20,7 +21,7 @@ export default function Login() {
 
     axios
       .post(
-        "http://localhost:3000/user/login",
+        `${API_URL}/user/login`,
         { username, password },
         { withCredentials: true },
       )

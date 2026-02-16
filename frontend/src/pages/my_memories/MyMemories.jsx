@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./MyMemories.css";
+import API_URL from "../../config/api";
 
 import Note from "../../components/notes/Note";
 import NavBar from "../../components/navigation/NavBar";
@@ -23,7 +24,7 @@ const MyMemories = () => {
   useEffect(() => {
     const fetchPolas = () => {
       axios
-        .get("http://localhost:3000/pola/my", { withCredentials: true })
+        .get(`${API_URL}/pola/my`, { withCredentials: true })
         .then((res) => setPolas(res.data))
         .catch((err) => setError(err.response.data));
     };
@@ -32,7 +33,7 @@ const MyMemories = () => {
 
   const handleEdit = (id, editData) => {
     axios
-      .put(`http://localhost:3000/pola/${id}`, 
+      .put(`${API_URL}/pola/${id}`, 
         editData, 
         { withCredentials: true }
       )
@@ -51,7 +52,7 @@ const MyMemories = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:3000/pola/${id}`, { withCredentials: true })
+      .delete(`${API_URL}/pola/${id}`, { withCredentials: true })
       .then(() => {
         setPolas((prev) => prev.filter((pola) => pola._id !== id));
       })
@@ -62,7 +63,7 @@ const MyMemories = () => {
     const pola = polas.find((p) => p._id === id);
     axios
       .put(
-        `http://localhost:3000/pola/${id}`,
+        `${API_URL}/pola/${id}`,
         { isPrivate: !pola.isPrivate },
         { withCredentials: true }
       )

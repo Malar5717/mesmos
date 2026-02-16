@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./NavBar.css";
 import { Link, useLocation } from "react-router-dom";
+import API_URL from "../../config/api";
 
 // conditional rendering
 function NavBar({ onAddClick, isCreateOpen }) {
@@ -13,7 +14,7 @@ function NavBar({ onAddClick, isCreateOpen }) {
   useEffect(() => {
     const isAuth = () => {
       axios
-        .get("http://localhost:3000/user/protected", { withCredentials: true })
+        .get(`${API_URL}/user/protected`, { withCredentials: true })
         .then((res) => setIsVerified(res.data.isVerified))
         .catch((err) => console.log(err));
     };
@@ -44,7 +45,7 @@ function NavBar({ onAddClick, isCreateOpen }) {
               title="logout"
               onClick={() =>
                 axios
-                  .get("http://localhost:3000/user/logout", {
+                  .get(`${API_URL}/user/logout`, {
                     withCredentials: true,
                   })
                   .then(() => setIsVerified(false))

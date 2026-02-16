@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import "./Create.css";
+import API_URL from "../../config/api";
 
 const nstyles = ["plain-parch", "cubed", "legal-pad", "sticky-note", "dotted"];
 const mstyles = [
@@ -46,13 +47,13 @@ function Create({ setIsCreateOpen, setPolas }) {
     formData.append("style", style);
     formData.append("isPrivate", isPrivate);
     axios
-      .post("http://localhost:3000/pola/create", formData, {
+      .post(`${API_URL}/pola/create`, formData, {
         withCredentials: true,
       })
       .then(() => {
         setIsCreateOpen(false);
         axios
-          .get("http://localhost:3000/pola/all")
+          .get(`${API_URL}/pola/all`)
           .then((res) => setPolas(res.data));
       });
   };

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import axios from "axios";
+import API_URL from "../../config/api";
 
 import Note from "../../components/notes/Note";
 import NavBar from "../../components/navigation/NavBar";
@@ -15,7 +16,7 @@ const HomeContent = () => {
 
   const fetchPolas = () => {
     axios
-      .get("http://localhost:3000/pola/all")
+      .get(`${API_URL}/pola/all`)
       .then((res) => {
         setPolas(res.data);
         setLoading(false);
