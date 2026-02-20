@@ -19,6 +19,7 @@ const MyMemories = () => {
   const [editPola, setEditPola] = useState(null);
   const [edittedTitle, setEdittedTitle] = useState("");
   const [edittedDescription, setEdittedDescription] = useState("");
+  const [deletePolaId, setDeletePolaId] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -151,7 +152,7 @@ const MyMemories = () => {
 
                   <FontAwesomeIcon
                     icon={faTrash}
-                    onClick={() => handleDelete(pola._id)}
+                    onClick={() => setDeletePolaId(pola._id)}
                   />
 
                   <FontAwesomeIcon
@@ -160,6 +161,41 @@ const MyMemories = () => {
                   />
 
                 </div>
+
+                {deletePolaId === pola._id && (
+                  <div className="delete-confirm" onClick={() => setDeletePolaId(null)}>
+                    <div
+                      className="delete-confirm-box"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <span className="corner corner-tl"></span>
+                      <span className="corner corner-tr"></span>
+                      <span className="corner corner-bl"></span>
+                      <span className="corner corner-br"></span>
+                      
+                      <p>Are you sure?</p>
+                      <div className="delete-confirm-actions">
+                        <button
+                          type="button"
+                          className="onYes"
+                          onClick={() => {
+                            handleDelete(deletePolaId);
+                            setDeletePolaId(null);
+                          }}
+                        >
+                          Yes
+                        </button>
+                        <button
+                          type="button"
+                          className="onNo"
+                          onClick={() => setDeletePolaId(null)}
+                        >
+                          No
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             );
           })}

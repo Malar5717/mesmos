@@ -28,9 +28,8 @@ export default function Login() {
       .then(() => {
         nav("/home");
       })
-      .catch((err) => {
+      .catch(() => {
         setError("Invalid username or password.");
-        console.log(err);
       });
   };
   

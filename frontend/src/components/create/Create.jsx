@@ -260,6 +260,11 @@ function Create({ setIsCreateOpen, setPolas }) {
             className="create-confirm-box"
             onClick={(e) => e.stopPropagation()}
           >
+            <span className="corner corner-tl"></span>
+            <span className="corner corner-tr"></span>
+            <span className="corner corner-bl"></span>
+            <span className="corner corner-br"></span>
+            
             <p>Are you sure?</p>
             <div className="create-confirm-actions">
               <button

@@ -9,6 +9,8 @@
 .controls {
     margin: 10px;
     cursor: pointer;
+    display: flex;
+    gap: 5px;
 }
 
 button {
@@ -20,4 +22,86 @@ button {
 .editContent {
     display: flex;
     flex-direction: column;
+}
+
+.masonry-item {
+    position: relative;
+}
+
+.delete-confirm {
+    position: absolute;
+    top: 70%;
+    right: -5%;
+    z-index: 1100;
+}
+
+.delete-confirm-box {
+    position: relative;
+    padding: 10px;
+    text-align: center;
+    animation: floatConfirm 2s ease-in-out infinite alternate;
+}
+
+.corner {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+}
+
+.corner-tl {
+    top: 0px;
+    left: 0px;
+    border-top: 3px solid black;
+    border-left: 3px solid black;
+}
+
+.corner-tr {
+    top: 0px;
+    right: 0px;
+    border-top: 3px solid black;
+    border-right: 3px solid black;
+}
+
+.corner-bl {
+    bottom: 0px;
+    left: 0px;
+    border-bottom: 3px solid black;
+    border-left: 3px solid black;
+}
+
+.corner-br {
+    bottom: 0px;
+    right: 0px;
+    border-bottom: 3px solid black;
+    border-right: 3px solid black;
+}
+
+.delete-confirm-box p {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.delete-confirm-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+@keyframes floatConfirm {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-5px);
+    }
+}
+
+.delete-confirm-actions button {
+    border: none;
+    padding: 4px 12px;
+    font-size: 14px;
+    font-weight: 700;
 }

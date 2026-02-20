@@ -55,7 +55,7 @@ export default function SignUp() {
           <div className="form_body">
 
             <div className="form_item">
-              <label htmlFor="username">enter username:</label>
+              <label htmlFor="username">enter username:<span style={{color: 'red', fontSize: '15px'}}>*</span></label>
               <input
                 type="text"
                 id="username"
@@ -65,7 +65,7 @@ export default function SignUp() {
             </div>
 
             <div className="form_item">
-              <label htmlFor="usermail">enter email:</label>
+              <label htmlFor="usermail">enter email:<span style={{color: 'red', fontSize: '15px'}}>*</span></label>
               <input
                 type="email"
                 id="usermail"
@@ -75,7 +75,7 @@ export default function SignUp() {
             </div>
 
             <div className="form_item">
-              <label htmlFor="password">create password:</label>
+              <label htmlFor="password">create password:<span style={{color: 'red', fontSize: '15px'}}>*</span></label>
               <input
                 type="password"
                 id="password"

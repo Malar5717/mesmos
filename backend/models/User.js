@@ -20,7 +20,7 @@ const userSchema = new Schema({
         type: String,
         required: true,
         select: false
-    },
+    }
 }, { timestamps: true });
 
 // sign up 
